@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Számológép</title>
+  </head>
+  <body>
+    <h1>Számológép</h1>
+    <form id="szamolo">
+      <label for="szamol"></label>
+      <input type="number" id="elsosz" name="elsosz" required />
+      <select name="opciok" id="opciok">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <label for="szamol"></label>
+      <input type="number" id="masodiksz" name="masodiksz" required />
+      <button type="submit">Számol</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+      document
+        .getElementById("szamolo")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const num1 = parseInt(document.getElementById("elsosz").value);
+          const num2 = parseInt(document.getElementById("masodiksz").value);
+          var ered = 0;
+          switch (document.getElementById("opciok").value) {
+            case "+":
+              ered = num1 + num2;
+            case "-":
+              ered = num1 - num2;
+            case "*":
+              ered = num1 * num2;
+            case "/":
+              ered = num1 / num2;
+          }
+          document.getElementById("result").innerHTML = `Eredmény: ${ered}`;
+        });
+    </script>
+  </body>
+</html>

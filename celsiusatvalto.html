@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celsius atvalto</title>
+  </head>
+  <body>
+    <h1>Celsius atvalto</h1>
+    <form id="atvalto">
+      <label for="celsius">Celsius:</label>
+      <input type="number" id="celsius" name="celsius" required />
+      <button type="submit">Atvalt</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+      document
+        .getElementById("atvalto")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const celsius = document.getElementById("celsius").value;
+          const farenheit = celsius * 1.8 + 32;
+          const kelvin = parseFloat(celsius) + 273.15;
+          document.getElementById("result").innerHTML =
+            `<div>${celsius} &deg;C = ${farenheit}</div>
+            <div>${celsius} &deg;C = ${kelvin}</div>`;
+        });
+    </script>
+  </body>
+</html>
