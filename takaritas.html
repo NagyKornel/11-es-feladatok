@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+    <title>Havi megtakarítás kalkulátor</title>
+</head>
+<body>
+    <h1>Havi megtakarítás kalkulátor</h1>
+    <form id="takaritas">
+        <label for="fizu">Havi fizetés:</label>
+        <input type="number" id="fizu" name="fizu" required /> <br><br>
+        <label for="arany">Megtakarítási aránya (%):</label>
+        <input type="number" id="arany" name="arany" required /> <br><br>
+        <label for="idotart">Időtartam:</label>
+        <input type="number" id="idotart" name="idotart" required /> <br><br>
+        <button type="submit">Kiszámol</button><br><br>
+    </form>
+
+    <table id="eredmeny">
+        <thead>
+            <tr>
+                <th>Hónap</th>
+                <th>Havi megtakarítás (Ft)</th>
+                <th>Teljes megtakarítás (Ft)</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script>
+        document.getElementById("takaritas")
+        .addEventListener("submit", function (event){
+            event.preventDefault(); 
+            const fizu = parseFloat(document.getElementById("fizu").value);
+            const arany = parseFloat(document.getElementById("arany").value) / 100;
+            const idotart = parseInt(document.getElementById("idotart").value);
+
+            var t = document.getElementById("eredmeny");
+
+            while(t.rows.length > 1) {
+                t.deleteRow(1);
+            }
+
+            let teljesMegtakaritas = 0;
+
+            for (let honap = 1; honap <= idotart; honap++) {
+                let haviMegtakaritas = fizu * arany;
+                teljesMegtakaritas += haviMegtakaritas;
+
+                var sor = t.insertRow();
+                var honapcella = sor.insertCell(0);
+                var havicella = sor.insertCell(1);
+                var teljescella = sor.insertCell(2);
+
+                honapcella.innerHTML = honap;
+                havicella.innerHTML = Math.round(haviMegtakaritas, 2);
+                teljescella.innerHTML = Math.round(teljesMegtakaritas, 2);
+            }
+
+            document.getElementById("fizu").value = "";
+            document.getElementById("arany").value = "";
+            document.getElementById("idotart").value = "";
+        });
+    </script>
+</body>
+</html>
