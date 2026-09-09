@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI kalkulator</title>
+</head>
+<body>
+    <h1>BMI kalkulátor</h1>
+    <form id="bmi">
+      <label for="suly">Súly (kg):</label>
+      <input type="number" id="suly" name="suly" required /> <br> <br>
+      <label for="magassag">Magasság (cm):</label>
+      <input type="number" id="magassag" name="magassag" required />
+      <button type="submit">Számol</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        document
+        .getElementById("bmi")
+        .addEventListener("submit", function (event){
+            event.preventDefault(); 
+            const suly = parseInt(document.getElementById("suly").value);
+            const magassag = parseInt(document.getElementById("magassag").value);
+            var bmimennyiseg = Math.round(suly / Math.pow(magassag / 100, 2), 2);
+
+            switch(true){
+                case bmimennyiseg < 15.9: document.getElementById("result").innerHTML = `Súlyos soványság: ${bmimennyiseg}`; break;
+                case bmimennyiseg < 16.9 && bmimennyiseg >= 15.9: document.getElementById("result").innerHTML = `Mérsékelt soványság: ${bmimennyiseg}`; break;
+                case bmimennyiseg < 18.4 && bmimennyiseg >= 16.9: document.getElementById("result").innerHTML = `Enyhe soványság: ${bmimennyiseg}`; break;
+                case bmimennyiseg < 24.9 && bmimennyiseg >= 18.4: document.getElementById("result").innerHTML = `Normál testsúly: ${bmimennyiseg}`; break;
+                case bmimennyiseg < 29.9 && bmimennyiseg >= 24.9: document.getElementById("result").innerHTML = `Túlsúly: ${bmimennyiseg}`; break;
+                case bmimennyiseg < 34.9 && bmimennyiseg >= 29.9: document.getElementById("result").innerHTML = `Elhízott (I. fokú): ${bmimennyiseg}`; break;
+                case bmimennyiseg < 39.9 && bmimennyiseg >= 34.9: document.getElementById("result").innerHTML = `Elhízott (II. fokú): ${bmimennyiseg}`; break;
+                case bmimennyiseg > 40: document.getElementById("result").innerHTML = `Súlyosan elhízott (III. fokú): ${bmimennyiseg}`; break;
+            }
+        });
+    </script>
+</body>
+</html>
