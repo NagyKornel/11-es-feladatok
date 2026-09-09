@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pénzváltó</title>
+</head>
+<body>
+    <form id="penzvalto">
+        <label for="osszeg">Pénzösszeg (HUF):</label>
+        <input type="number" id="osszeg" name="osszeg" required />
+        <select name="valuta" id="valuta">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+        <button type="submit">Váltás</button>
+        <p id="result"></p>
+    </form>
+
+    <script>
+        document
+        .getElementById("penzvalto")
+        .addEventListener("submit", function (event){
+            event.preventDefault(); 
+            const osszeg = parseInt(document.getElementById("osszeg").value);
+            var valasztottValuta = document.getElementById("valuta").value;
+            var valtasEredmeny = 0;
+
+            switch(valasztottValuta){
+                case "USD": valtasEredmeny = osszeg / 350; break;
+                case "EUR": valtasEredmeny = osszeg / 380; break;
+            }
+            document.getElementById("result").innerHTML =  `${osszeg}Ft = ${valtasEredmeny.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>

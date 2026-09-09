@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <title>Táblázat feltöltő</title>
+</head>
+<body>
+    <h1>Táblázat feltöltő</h1>
+    
+    <form id="tform">
+        <label for="nev">Név:</label>
+        <input type="text" id="nev" name="nev" required /><br>
+        <label for="eletkor">Életkor:</label>
+        <input type="number" id="eletkor" name="eletkor" required />
+        <button type="submit">Hozzáad</button>
+    </form>
+    <br> <br>
+
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>Életkor</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script>
+        document.getElementById("tform")
+        .addEventListener("submit", function (event){
+            event.preventDefault(); 
+            const nev = document.getElementById("nev").value;
+            const eletkor = parseInt(document.getElementById("eletkor").value);
+
+            var t = document.getElementById("tabla");
+            var sor = t.insertRow(1);
+            var nevcella = sor.insertCell(0);
+            var eletkorcella = sor.insertCell(1);
+
+            nevcella.innerHTML = nev;
+            eletkorcella.innerHTML = eletkor;
+
+            document.getElementById("nev").value = "";
+            document.getElementById("eletkor").value = "";
+        });
+    </script>
+</body>
+</html>
